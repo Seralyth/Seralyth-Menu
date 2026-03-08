@@ -455,6 +455,11 @@ namespace Seralyth.Mods
             Visuals.VisualizeAura(GorillaTagger.Instance.rightHandTransform.position, tagReachDistance, backgroundColor.GetCurrentColor(), -149285);
         }
 
+        public static void TagFix()
+        {
+            GorillaTagger.Instance.maxTagDistance = 9999f;
+        }
+
         public static bool ValidateTag(VRRig Rig) =>
             Vector3.Distance(ServerSyncPos, Rig.transform.position) < 6f;
 
