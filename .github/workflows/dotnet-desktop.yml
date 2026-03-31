@@ -35,4 +35,4 @@ jobs:
       with:
         name: build-output
         path: |
-          **/bin/Debug/netstandard2.1/ii's Stupid Menu.dll
+          **/bin/Debug/netstandard2.1/Seralyth Menu.dll
