@@ -3215,7 +3215,7 @@ namespace Seralyth.Menu
             }
             if (isKeyboardCondition)
             {
-                GetObject("Shoulder Camera").transform.Find("CM vcam1").gameObject.SetActive(false);
+                GetObject("Shoulder Camera")?.transform.Find("CM vcam1")?.gameObject.SetActive(false);
                 if (TPC != null)
                 {
                     isOnPC = true;
@@ -3370,7 +3370,7 @@ namespace Seralyth.Menu
             }
             catch { }
 
-            GetObject("Shoulder Camera").transform.Find("CM vcam1").gameObject.SetActive(true);
+            GetObject("Shoulder Camera")?.transform.Find("CM vcam1")?.gameObject.SetActive(true);
             if (dynamicSounds)
                 SoundManager.Play(SoundManager.DefaultSounds["Close"], global: true);
 
