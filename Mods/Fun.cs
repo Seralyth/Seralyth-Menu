@@ -54,6 +54,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Windows.Speech;
 using static Seralyth.Menu.Main;
@@ -637,6 +638,25 @@ namespace Seralyth.Mods
 
         private static GameObject FreeCamObject;
         private static Vector3 CameraVelocity;
+        private static Vector2 freecamLookAngles;
+        private static float freecamLookRoll;
+        private static bool freecamLookInitialized;
+        private static bool freecamMouseLookStarted;
+        private static Vector3 freecamLastMousePosition;
+        private static bool freecamFreezeCaptured;
+        private static Vector3 freecamFrozenBodyPosition;
+        private static bool freecamRigStateCaptured;
+        private static bool freecamRigWasEnabled;
+        private static bool freecamHandFreezeCaptured;
+        private static Vector3 freecamFrozenLeftHandPosition;
+        private static Vector3 freecamFrozenRightHandPosition;
+        private static Quaternion freecamFrozenLeftHandRotation;
+        private static Quaternion freecamFrozenRightHandRotation;
+        private static bool freecamTPCStateCaptured;
+        private static bool freecamTPCWasEnabled;
+        private static Camera freecamNormalCamera;
+        public static Transform FreecamTransform => FreeCamObject != null ? FreeCamObject.transform : null;
+        public static Camera FreecamCamera => FreeCamObject != null ? FreeCamObject.GetComponent<Camera>() : null;
         public static void Freecam()
         {
             if (FreeCamObject == null)
@@ -648,18 +668,207 @@ namespace Seralyth.Mods
             Camera FreeCamera = FreeCamObject.GetOrAddComponent<Camera>();
             FreeCamera.nearClipPlane = 0.01f;
             FreeCamera.cameraType = CameraType.Game;
+            FreeCamera.depth = 999f;
 
-            Vector3 inputDirection = new Vector3(leftJoystick.x, rightJoystick.y, leftJoystick.y);
+            bool isVR = UnityEngine.XR.XRSettings.isDeviceActive;
+            if (isVR)
+            {
+                if (VRRig.LocalRig != null)
+                {
+                    if (!freecamRigStateCaptured)
+                    {
+                        freecamRigWasEnabled = VRRig.LocalRig.enabled;
+                        freecamRigStateCaptured = true;
+                    }
 
-            Vector3 playerForward = GTPlayer.Instance.bodyCollider.transform.forward.X_Z();
-            Vector3 playerRight = GTPlayer.Instance.bodyCollider.transform.right.X_Z();
+                    if (VRRig.LocalRig.enabled)
+                        VRRig.LocalRig.enabled = false;
+                }
+
+                if (!freecamFreezeCaptured)
+                {
+                    freecamFrozenBodyPosition = GorillaTagger.Instance.rigidbody.transform.position;
+                    freecamFreezeCaptured = true;
+                }
+
+                GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
+                GorillaTagger.Instance.rigidbody.angularVelocity = Vector3.zero;
+                GorillaTagger.Instance.rigidbody.transform.position = freecamFrozenBodyPosition;
+
+                if (!freecamHandFreezeCaptured)
+                {
+                    freecamFrozenLeftHandPosition = GorillaTagger.Instance.leftHandTransform.position;
+                    freecamFrozenRightHandPosition = GorillaTagger.Instance.rightHandTransform.position;
+                    freecamFrozenLeftHandRotation = GorillaTagger.Instance.leftHandTransform.rotation;
+                    freecamFrozenRightHandRotation = GorillaTagger.Instance.rightHandTransform.rotation;
+                    freecamHandFreezeCaptured = true;
+                }
+
+                GorillaTagger.Instance.leftHandTransform.position = freecamFrozenLeftHandPosition;
+                GorillaTagger.Instance.rightHandTransform.position = freecamFrozenRightHandPosition;
+                GorillaTagger.Instance.leftHandTransform.rotation = freecamFrozenLeftHandRotation;
+                GorillaTagger.Instance.rightHandTransform.rotation = freecamFrozenRightHandRotation;
+            }
+            else
+            {
+                freecamFreezeCaptured = false;
+                freecamHandFreezeCaptured = false;
+                freecamRigStateCaptured = false;
+                freecamLookRoll = 0f;
+            }
+
+            if (!freecamTPCStateCaptured)
+            {
+                freecamNormalCamera = TPC;
+
+                if (freecamNormalCamera == null)
+                {
+                    GameObject shoulderCameraObject = GetObject("Shoulder Camera");
+                    if (shoulderCameraObject != null)
+                        freecamNormalCamera = shoulderCameraObject.GetComponent<Camera>();
+                }
+
+                if (freecamNormalCamera != null)
+                {
+                    freecamTPCWasEnabled = freecamNormalCamera.enabled;
+                    freecamTPCStateCaptured = true;
+                }
+            }
+
+            if (freecamNormalCamera != null)
+            {
+                if (menu != null)
+                {
+                    if (!freecamNormalCamera.enabled)
+                        freecamNormalCamera.enabled = true;
+
+                    if (FreeCamera.enabled)
+                        FreeCamera.enabled = false;
+                }
+                else
+                {
+                    if (freecamNormalCamera.enabled)
+                        freecamNormalCamera.enabled = false;
+
+                    if (!FreeCamera.enabled)
+                        FreeCamera.enabled = true;
+                }
+            }
+
+            if (!freecamLookInitialized)
+            {
+                Vector3 startEuler = GorillaTagger.Instance.headCollider.transform.rotation.eulerAngles;
+                float startPitch = startEuler.x > 180f ? startEuler.x - 360f : startEuler.x;
+                freecamLookAngles = new Vector2(Mathf.Clamp(startPitch, -90f, 90f), startEuler.y);
+                freecamLookRoll = startEuler.z > 180f ? startEuler.z - 360f : startEuler.z;
+                freecamLookInitialized = true;
+            }
+
+            Mouse mouse = Mouse.current;
+            bool rightMouseHeld = mouse != null && mouse.rightButton.isPressed;
+            bool rotateWithMouse = mouse != null && rightMouseHeld;
+
+            if (UnityEngine.XR.XRSettings.isDeviceActive && !rotateWithMouse)
+            {
+                Vector3 vrEuler = GorillaTagger.Instance.headCollider.transform.rotation.eulerAngles;
+                float vrPitch = vrEuler.x > 180f ? vrEuler.x - 360f : vrEuler.x;
+                freecamLookAngles = new Vector2(Mathf.Clamp(vrPitch, -90f, 90f), vrEuler.y);
+                freecamLookRoll = vrEuler.z > 180f ? vrEuler.z - 360f : vrEuler.z;
+            }
+
+            if (rotateWithMouse)
+            {
+                if (!freecamMouseLookStarted)
+                {
+                    freecamMouseLookStarted = true;
+                    freecamLastMousePosition = mouse.position.ReadValue();
+                }
+
+                Vector2 currentMousePosition = mouse.position.ReadValue();
+                Vector2 mouseDelta = currentMousePosition - (Vector2)freecamLastMousePosition;
+                freecamLastMousePosition = currentMousePosition;
+
+                float yawDelta = mouseDelta.x * 0.2f;
+                float pitchDelta = mouseDelta.y * 0.2f;
+
+                freecamLookAngles.y += yawDelta;
+                freecamLookAngles.x = Mathf.Clamp(freecamLookAngles.x - pitchDelta, -90f, 90f);
+            }
+            else
+                freecamMouseLookStarted = false;
+
+            Quaternion freecamRotation = Quaternion.Euler(freecamLookAngles.x, freecamLookAngles.y, freecamLookRoll);
+
+            Keyboard keyboard = Keyboard.current;
+
+            bool W = keyboard != null && keyboard.wKey.isPressed;
+            bool A = keyboard != null && keyboard.aKey.isPressed;
+            bool S = keyboard != null && keyboard.sKey.isPressed;
+            bool D = keyboard != null && keyboard.dKey.isPressed;
+            bool Space = keyboard != null && keyboard.spaceKey.isPressed;
+            bool Shift = keyboard != null && (keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed);
+
+            bool usingKeyboard = W || A || S || D || Space || Shift;
+            Vector3 inputDirection = usingKeyboard
+                ? new Vector3((D ? 1f : 0f) - (A ? 1f : 0f), (Space ? 1f : 0f) - (Shift ? 1f : 0f), (W ? 1f : 0f) - (S ? 1f : 0f))
+                : new Vector3(leftJoystick.x, rightJoystick.y, leftJoystick.y);
+
+            if (!usingKeyboard && inputDirection.sqrMagnitude < 0.01f)
+                inputDirection = Vector3.zero;
+
+            inputDirection = Vector3.ClampMagnitude(inputDirection, 1f);
+
+            Vector3 playerForward = (freecamRotation * Vector3.forward).X_Z();
+            Vector3 playerRight = (freecamRotation * Vector3.right).X_Z();
 
             Vector3 velocity = inputDirection.x * playerRight + inputDirection.y * Vector3.up + inputDirection.z * playerForward;
-            velocity *= Movement.FlySpeed;
+            float freecamSpeed = Movement.FlySpeed <= 0.001f ? 10f : Movement.FlySpeed;
+            velocity *= freecamSpeed;
 
             CameraVelocity = Vector3.Lerp(CameraVelocity, velocity, 0.12875f);
             FreeCamObject.transform.position += CameraVelocity * Time.unscaledDeltaTime;
-            FreeCamObject.transform.rotation = GorillaTagger.Instance.headCollider.transform.rotation;
+            FreeCamObject.transform.rotation = freecamRotation;
+        }
+
+        public static void DisableFreecam()
+        // disabling it would cause alot of issues so i had to write a method for it
+        {
+            if (FreeCamObject != null)
+            {
+                Object.Destroy(FreeCamObject.GetComponent<Camera>());
+                Object.Destroy(FreeCamObject);
+                FreeCamObject = null;
+            }
+
+            if (freecamTPCStateCaptured && freecamNormalCamera != null)
+                freecamNormalCamera.enabled = freecamTPCWasEnabled;
+
+            if (UnityEngine.XR.XRSettings.isDeviceActive)
+            {
+                if (freecamRigStateCaptured && VRRig.LocalRig != null)
+                    VRRig.LocalRig.enabled = freecamRigWasEnabled;
+
+                Movement.EnableRig();
+            }
+
+            CameraVelocity = Vector3.zero;
+            freecamLookAngles = Vector2.zero;
+            freecamLookRoll = 0f;
+            freecamLookInitialized = false;
+            freecamMouseLookStarted = false;
+            freecamLastMousePosition = Vector3.zero;
+            freecamFreezeCaptured = false;
+            freecamFrozenBodyPosition = Vector3.zero;
+            freecamRigStateCaptured = false;
+            freecamRigWasEnabled = false;
+            freecamHandFreezeCaptured = false;
+            freecamFrozenLeftHandPosition = Vector3.zero;
+            freecamFrozenRightHandPosition = Vector3.zero;
+            freecamFrozenLeftHandRotation = Quaternion.identity;
+            freecamFrozenRightHandRotation = Quaternion.identity;
+            freecamTPCStateCaptured = false;
+            freecamTPCWasEnabled = false;
+            freecamNormalCamera = null;
         }
 
         public static void ThirdPersonCamera()
@@ -815,16 +1024,6 @@ namespace Seralyth.Mods
                     gunLocked = false;
                     DisableFreecam();
                 }
-            }
-        }
-
-        public static void DisableFreecam()
-        {
-            if (FreeCamObject != null)
-            {
-                Object.Destroy(FreeCamObject.GetComponent<Camera>());
-                Object.Destroy(FreeCamObject);
-                FreeCamObject = null;
             }
         }
 

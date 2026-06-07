@@ -246,6 +246,10 @@ namespace Seralyth.Menu
                 leftPrimary = ControllerInputPoller.instance.leftControllerPrimaryButton || UnityInput.GetKey(Settings.pcBindings[Settings.ControllerBinding.LeftPrimaryButton]);
                 leftSecondary = ControllerInputPoller.instance.leftControllerSecondaryButton || UnityInput.GetKey(Settings.pcBindings[Settings.ControllerBinding.LeftSecondaryButton]);
                 leftGrab = ControllerInputPoller.instance.leftGrab || UnityInput.GetKey(Settings.pcBindings[Settings.ControllerBinding.LeftGrip]);
+                if (UnityInput.GetKey(Settings.pcBindings[Settings.ControllerBinding.LeftGrip]))
+                {
+                    ControllerInputPoller.instance.leftControllerGripFloat = 1f;
+                }
                 rightGrab = ControllerInputPoller.instance.rightGrab || UnityInput.GetKey(Settings.pcBindings[Settings.ControllerBinding.RightGrip]);
                 leftTrigger = ControllerInputPoller.TriggerFloat(XRNode.LeftHand);
                 rightTrigger = ControllerInputPoller.TriggerFloat(XRNode.RightHand);
@@ -3218,6 +3222,8 @@ namespace Seralyth.Menu
                 GetObject("Shoulder Camera")?.transform.Find("CM vcam1").gameObject.SetActive(false);
                 if (TPC != null)
                 {
+                    Camera keyboardAnchorCamera = TPC;
+
                     isOnPC = true;
 
                     if (!XRSettings.isDeviceActive)
@@ -3260,15 +3266,15 @@ namespace Seralyth.Menu
                         pcBackground.GetComponent<Renderer>().material.color = new Color32((byte)(realcolor.r * 50), (byte)(realcolor.g * 50), (byte)(realcolor.b * 50), 255);
                     }
 
-                    menu.transform.parent = TPC.transform;
-                    menu.transform.position = TPC.transform.position + TPC.transform.forward * 0.5f;
-                    menu.transform.rotation = clickGUI && !XRSettings.isDeviceActive ? Quaternion.identity : TPC.transform.rotation * Quaternion.Euler(-90f, 90f, 0f);
+                    menu.transform.parent = keyboardAnchorCamera.transform;
+                    menu.transform.position = keyboardAnchorCamera.transform.position + keyboardAnchorCamera.transform.forward * 0.5f;
+                    menu.transform.rotation = clickGUI && !XRSettings.isDeviceActive ? Quaternion.identity : keyboardAnchorCamera.transform.rotation * Quaternion.Euler(-90f, 90f, 0f);
 
                     if (reference != null)
                     {
                         if (Mouse.current.leftButton.isPressed && !isMouseDown)
                         {
-                            Ray ray = TPC.ScreenPointToRay(Mouse.current.position.ReadValue());
+                            Ray ray = keyboardAnchorCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
                             bool worked = Physics.Raycast(ray, out RaycastHit hit, 512f, NoInvisLayerMask());
                             if (worked)
                             {
