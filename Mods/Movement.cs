@@ -2531,7 +2531,6 @@ namespace Seralyth.Mods
                 "Environment Objects/05Maze_PersistentObjects/GhostReactorElevatorManager/VIMForestLavaElevator/Triggers/VIMExp1_SetZoneTrigger",
                 "Environment Objects/05Maze_PersistentObjects/GhostReactorElevatorManager/VIMForestLavaElevator/Triggers/JoinRoomTrigger"
             },
-
         };
 
         public static void EnterTeleportToMap() // Credits to Malachi for some of the positions
@@ -2550,19 +2549,18 @@ namespace Seralyth.Mods
 
         public static void TeleportToMap(string zone, string pos)
         {
-            if (zone == "VSTUMP")
+            switch (zone)
             {
-                VirtualStumpTeleporter tele = GetObject("Environment Objects/LocalObjects_Prefab/TreeRoom/VirtualStump_HeadsetTeleporter/TeleporterTrigger").GetComponent<VirtualStumpTeleporter>();
-
-                tele.gameObject.transform.parent.parent.parent.parent.parent.parent.gameObject.SetActive(true); // wtf
-                tele.gameObject.transform.parent.parent.parent.parent.gameObject.SetActive(true);
-
-                tele.TeleportPlayer();
-            }
-            else
-            {
-                GetObject(zone)?.GetComponent<GorillaSetZoneTrigger>()?.OnBoxTriggered();
-                TeleportPlayer(GetObject(pos)?.transform.position ?? VRRig.LocalRig.transform.position);
+                case "VSTUMP":
+                    VirtualStumpTeleporter tele = GetObject("Environment Objects/LocalObjects_Prefab/TreeRoom/VirtualStump_HeadsetTeleporter/TeleporterTrigger").GetComponent<VirtualStumpTeleporter>();
+                    tele.gameObject.transform.parent.parent.parent.parent.parent.parent.gameObject.SetActive(true); // wtf
+                    tele.gameObject.transform.parent.parent.parent.parent.gameObject.SetActive(true);
+                    tele.TeleportPlayer();
+                    break;
+                default:
+                    GetObject(zone)?.GetComponent<GorillaSetZoneTrigger>()?.OnBoxTriggered();
+                    TeleportPlayer(GetObject(pos)?.transform.position ?? VRRig.LocalRig.transform.position);
+                    break;
             }
         }
 

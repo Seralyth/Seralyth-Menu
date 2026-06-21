@@ -399,14 +399,14 @@ namespace Seralyth.Mods
             {
                 antiReportNotifyDelay = Time.time + 0.1f;
 
-                if (notifyText == "")
-                    notifyText = GetPlayerFromVRRig(vrrig).NickName;
-                else
+                switch (notifyText) 
                 {
-                    if (notifyText.Contains("&"))
-                        notifyText = GetPlayerFromVRRig(vrrig).NickName + ", " + notifyText;
-                    else
-                        notifyText += " & " + GetPlayerFromVRRig(vrrig).NickName;
+                    case "":
+                        notifyText = GetPlayerFromVRRig(vrrig).NickName;
+                        break;
+                    default:
+                        notifyText = notifyText.Contains("&") ? GetPlayerFromVRRig(vrrig).NickName + ", " + notifyText : notifyText + " & " + GetPlayerFromVRRig(vrrig).NickName;
+                        break;
                 }
             });
 

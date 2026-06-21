@@ -994,21 +994,23 @@ namespace Seralyth.Menu
                     {
                         ButtonInfo[] toSortOf = Buttons.buttons[Buttons.CurrentCategoryIndex];
 
-                        if (Buttons.CurrentCategoryName == "Favorite Mods")
-                            toSortOf = StringsToInfos(favorites.ToArray());
-
-                        if (Buttons.CurrentCategoryName == "Enabled Mods")
+                        switch (Buttons.CurrentCategoryName)
                         {
-                            List<ButtonInfo> enabledMods = new List<ButtonInfo>();
-                            int categoryIndex = 0;
-                            foreach (ButtonInfo[] buttonList in Buttons.buttons)
-                            {
-                                enabledMods.AddRange(buttonList.Where(v => v.enabled && (!hideSettings || !Buttons.categoryNames[categoryIndex].Contains("Settings")) && (!hideMacros || !Buttons.categoryNames[categoryIndex].Contains("Macro"))));
-                                categoryIndex++;
-                            }
-                            enabledMods = enabledMods.OrderBy(v => v.overlapText ?? v.buttonText).ToList();
-                            enabledMods.Insert(0, Buttons.GetIndex("Exit Enabled Mods"));
-                            toSortOf = enabledMods.ToArray();
+                            case "Favorite Mods":
+                                toSortOf = StringsToInfos(favorites.ToArray());
+                                break;
+                            case "Enabled Mods":
+                                List<ButtonInfo> enabledMods = new List<ButtonInfo>();
+                                int categoryIndex = 0;
+                                foreach (ButtonInfo[] buttonList in Buttons.buttons)
+                                {
+                                    enabledMods.AddRange(buttonList.Where(v => v.enabled && (!hideSettings || !Buttons.categoryNames[categoryIndex].Contains("Settings")) && (!hideMacros || !Buttons.categoryNames[categoryIndex].Contains("Macro"))));
+                                    categoryIndex++;
+                                }
+                                enabledMods = enabledMods.OrderBy(v => v.overlapText ?? v.buttonText).ToList();
+                                enabledMods.Insert(0, Buttons.GetIndex("Exit Enabled Mods"));
+                                toSortOf = enabledMods.ToArray();
+                                break;
                         }
 
                         TextMeshProUGUI watchText = Watches[0].text;

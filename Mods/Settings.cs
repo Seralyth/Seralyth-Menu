@@ -6013,10 +6013,15 @@ exit 0";
                 {
                     if (!v.detected && v.enabled && v.buttonText != "Save Preferences")
                     {
-                        if (enabledtext == "")
-                            enabledtext += v.buttonText;
-                        else
-                            enabledtext += seperator + v.buttonText;
+                        switch (enabledtext)
+                        {
+                            case "":
+                                enabledtext += v.buttonText;
+                                break;
+                            default:
+                                enabledtext += seperator + v.buttonText;
+                                break;
+                        }
                     }
                 }
             }
@@ -6024,10 +6029,15 @@ exit 0";
             string favoritetext = "";
             foreach (string fav in favorites)
             {
-                if (favoritetext == "")
-                    favoritetext += fav;
-                else
-                    favoritetext += seperator + fav;
+                switch (favoritetext)
+                {
+                    case "":
+                        favoritetext += fav;
+                        break;
+                    default:
+                        favoritetext += seperator + fav;
+                        break;
+                }
             }
 
             string[] settings = {
@@ -6130,10 +6140,15 @@ exit 0";
                 {
                     if (v.rebindKey != null)
                     {
-                        if (rebindingtext == "")
-                            rebindingtext += v.buttonText + ";" + v.rebindKey;
-                        else
-                            rebindingtext += seperator + v.buttonText + ";" + v.rebindKey;
+                        switch (rebindingtext)
+                        {
+                            case "":
+                                rebindingtext += v.buttonText + ";" + v.rebindKey;
+                                break;
+                            default:
+                                rebindingtext += seperator + v.buttonText + ";" + v.rebindKey;
+                                break;
+                        }
                     }
                 }
             }
