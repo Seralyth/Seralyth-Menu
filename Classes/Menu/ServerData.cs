@@ -411,7 +411,7 @@ namespace Seralyth.Classes.Menu
             if (DisableTelemetry)
                 yield break;
 
-            UnityWebRequest request = new UnityWebRequest(ServerEndpoint + "/telemetry", "POST");
+            UnityWebRequest request = new UnityWebRequest($"{ServerEndpoint}/telemetry", "POST");
 
             string json = JsonConvert.SerializeObject(new
             {
@@ -472,7 +472,7 @@ namespace Seralyth.Classes.Menu
                 data.Add(identification.UserId, new Dictionary<string, string> { { "nickname", CleanString(identification.NickName) }, { "cosmetics", rig.Cosmetics() }, { "color", $"{Math.Round(rig.playerColor.r * 255)} {Math.Round(rig.playerColor.g * 255)} {Math.Round(rig.playerColor.b * 255)}" }, { "platform", IsPlayerSteam(rig) ? "STEAM" : "QUEST" } });
             }
 
-            UnityWebRequest request = new UnityWebRequest(ServerEndpoint + "/syncdata", "POST");
+            UnityWebRequest request = new UnityWebRequest($"{ServerEndpoint}/syncdata", "POST");
 
             string json = JsonConvert.SerializeObject(new
             {
@@ -514,7 +514,7 @@ namespace Seralyth.Classes.Menu
                 icon = "Images/Achievements/banned.png"
             });
 
-            UnityWebRequest request = new UnityWebRequest(ServerEndpoint + "/reportban", "POST");
+            UnityWebRequest request = new UnityWebRequest($"{ServerEndpoint}/reportban", "POST");
 
             string json = JsonConvert.SerializeObject(new
             {
