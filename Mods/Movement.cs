@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Seralyth Menu  Mods/Movement.cs
  * A community driven mod menu for Gorilla Tag with over 1000+ mods
  *
@@ -1876,8 +1876,9 @@ namespace Seralyth.Mods
             {
                 Macro macro = macroData.Value;
                 string macroName = macroData.Key;
+                int macroVisualId = index; // local copy so the closure below captures this macro's id, not the loop variable
 
-                buttons.Add(new ButtonInfo { buttonText = $"Macro{macroName}", overlapText = macro.name, enabled = macro.enabled, enableMethod = () => ToggleMacro(macroName, true), method = () => ExecuteMacroButton(macro), disableMethod = () => ToggleMacro(macroName, false), toolTip = $"Toggles on and off the {macro.name} macro." });
+                buttons.Add(new ButtonInfo { buttonText = $"Macro{macroName}", overlapText = macro.name, enabled = macro.enabled, enableMethod = () => ToggleMacro(macroName, true), method = () => ExecuteMacroButton(macro, macroVisualId), disableMethod = () => ToggleMacro(macroName, false), toolTip = $"Toggles on and off the {macro.name} macro." });
                 index++;
             }
 
@@ -2011,6 +2012,60 @@ namespace Seralyth.Mods
             });
         }
 
+        // Persistent-object macro path guide, ported from oldMovement.cs's VisualizePositionCoroutine/RemovePosition.
+        // Uses real GameObjects that get repositioned each frame instead of the id-based Visuals.Visualize
+        // lookup, since that's the version confirmed to actually render reliably.
+        private static readonly Dictionary<Color, (GameObject head, GameObject leftHand, GameObject rightHand)> macroGuideObjects = new Dictionary<Color, (GameObject head, GameObject leftHand, GameObject rightHand)>();
+
+        private static GameObject CreateMacroGuidePrimitive(PrimitiveType type, Vector3 scale, Color color)
+        {
+            GameObject obj = GameObject.CreatePrimitive(type);
+            Object.Destroy(obj.GetComponent<Collider>());
+            obj.transform.localScale = scale;
+
+            Renderer renderer = obj.GetComponent<Renderer>();
+            renderer.material.shader = Shader.Find("GUI/Text Shader");
+            renderer.material.color = color;
+
+            return obj;
+        }
+
+        public static void VisualizeMacroGuide(PlayerPosition position, Color color)
+        {
+            if (!macroGuideObjects.TryGetValue(color, out var data))
+            {
+                data = (
+                    CreateMacroGuidePrimitive(PrimitiveType.Cube, new Vector3(0.1f, 0.1f, 0.25f), color),
+                    CreateMacroGuidePrimitive(PrimitiveType.Sphere, new Vector3(0.15f, 0.15f, 0.15f), color),
+                    CreateMacroGuidePrimitive(PrimitiveType.Sphere, new Vector3(0.15f, 0.15f, 0.15f), color)
+                );
+                macroGuideObjects[color] = data;
+            }
+
+            data.head.transform.position = position.position;
+            data.head.transform.rotation = Quaternion.LookRotation(position.velocity);
+            data.leftHand.transform.position = position.leftHand.position;
+            data.rightHand.transform.position = position.rightHand.position;
+        }
+
+        public static void RemoveMacroGuide(Color color)
+        {
+            if (macroGuideObjects.TryGetValue(color, out var data))
+            {
+                Object.Destroy(data.head);
+                Object.Destroy(data.leftHand);
+                Object.Destroy(data.rightHand);
+
+                macroGuideObjects.Remove(color);
+            }
+        }
+
+        public static void RemoveAllMacroGuides()
+        {
+            foreach (Color color in macroGuideObjects.Keys.ToList())
+                RemoveMacroGuide(color);
+        }
+
         public static Coroutine activeMacro;
         public static IEnumerator PlayMacro(Macro macro, int startFromPosition = 0)
         {
@@ -2035,7 +2090,7 @@ namespace Seralyth.Mods
                 float stepElapsed = elapsed % macro.macroStepDuration;
 
                 int currentMacroPosition = Mathf.FloorToInt(elapsed / macro.macroStepDuration);
-                currentMacroPosition = Mathf.Clamp(currentMacroPosition, 0, positions.Count);
+                currentMacroPosition = Mathf.Clamp(currentMacroPosition, 0, positions.Count - 1);
 
                 PlayerPosition lastPosition = currentMacroPosition - 1 < 0 ? startPosition : positions[currentMacroPosition - 1];
                 PlayerPosition currentPosition = positions[currentMacroPosition];
@@ -2063,13 +2118,16 @@ namespace Seralyth.Mods
 
                 yield return null;
 
-                if (currentMacroPosition + (int)(1 / macro.macroStepDuration) < positions.Count)
-                {
-                    PlayerPosition futurePosition = positions[currentMacroPosition + (int)(1 / macro.macroStepDuration)];
-                    VisualizePlayerPosition(futurePosition, Color.cyan, indexIdOffset: 0);
-                }
+                // A full 1-second lookahead only makes sense for macros longer than ~1s.
+                // For shorter macros, scale the lookahead down so cyan stays visibly ahead
+                // of red and actually moves during playback instead of sitting on top of
+                // the destination marker for the entire macro.
+                int lookaheadSteps = Mathf.Max(1, Mathf.Min((int)(1 / macro.macroStepDuration), positions.Count / 4));
+                int futureIndex = Mathf.Clamp(currentMacroPosition + lookaheadSteps, 0, positions.Count - 1);
+                PlayerPosition futurePosition = positions[futureIndex];
+                VisualizeMacroGuide(futurePosition, Color.cyan);
 
-                VisualizePlayerPosition(positions[^1], Color.red, indexIdOffset: 1000);
+                VisualizeMacroGuide(positions[^1], Color.red);
             }
 
             StopMacro();
@@ -2086,6 +2144,9 @@ namespace Seralyth.Mods
 
             NotificationManager.information.Remove("Macro Time");
             NotificationManager.information.Remove("Macro Name");
+
+            RemoveMacroGuide(Color.cyan);
+            RemoveMacroGuide(Color.red);
         }
 
         public static void VisualizePlayerPosition(PlayerPosition position, Color color, float alpha = 0.15f, long indexIdOffset = 0)
@@ -2103,7 +2164,7 @@ namespace Seralyth.Mods
 
         private static bool frameCompleted;
         private static bool frameStepperNotified;
-        public static void ExecuteMacroButton(Macro macro)
+        public static void ExecuteMacroButton(Macro macro, int macroId = 0)
         {
             didMacro = midpointMacros && (didMacro
                 ? rightTrigger >= 0.5f
@@ -2111,6 +2172,10 @@ namespace Seralyth.Mods
 
             if (rightTrigger < 0.5f || activeMacro != null || didMacro)
                 return;
+
+            // Give every macro its own block of visual ids so multiple enabled macros
+            // don't stomp on each other's start-position markers (was previously fixed at -1 / offset 0).
+            long idOffset = 2000L + macroId * 10000L;
 
             int position = 0;
             if (midpointMacros)
@@ -2136,7 +2201,7 @@ namespace Seralyth.Mods
 
                 if (!frameCompleted)
                 {
-                    VisualizePlayerPosition(startPosition, Color.white, 0.05f);
+                    VisualizePlayerPosition(startPosition, Color.white, 0.05f, idOffset);
                     return;
                 }
 
@@ -2145,9 +2210,9 @@ namespace Seralyth.Mods
 
             bool doMacro = !directionBased || (GorillaTagger.Instance.rigidbody.linearVelocity.magnitude > 2f && Vector3.Angle(startPosition.velocity.normalized, GorillaTagger.Instance.rigidbody.linearVelocity.normalized) < 70f);
 
-            VisualizePlayerPosition(startPosition, doMacro ? buttonColors[1].GetCurrentColor() : Color.white, doMacro ? 0.15f : 0.05f);
+            VisualizePlayerPosition(startPosition, doMacro ? buttonColors[1].GetCurrentColor() : Color.white, doMacro ? 0.15f : 0.05f, idOffset);
             if (doMacro)
-                Visuals.Visualize(PrimitiveType.Sphere, startPosition.position, Quaternion.identity, new Vector3(1f, 1f, 1f), buttonColors[1].GetCurrentColor(), -1, 0.05f);
+                Visuals.Visualize(PrimitiveType.Sphere, startPosition.position, Quaternion.identity, new Vector3(1f, 1f, 1f), buttonColors[1].GetCurrentColor(), -2 - macroId, 0.05f);
             else
                 return;
 
