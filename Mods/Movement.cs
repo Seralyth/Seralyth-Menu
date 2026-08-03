@@ -2012,8 +2012,8 @@ namespace Seralyth.Mods
             });
         }
 
-        // Persistent-object macro path guide, ported from oldMovement.cs's VisualizePositionCoroutine/RemovePosition.
-        // Uses real GameObjects that get repositioned each frame instead of the id-based Visuals.Visualize
+        // persistent-object macro path guide, ported from oldMovement.cs's (orginal iistupid one)  VisualizePositionCoroutine/RemovePosition.
+        // uses real GameObjects that get repositioned each frame instead of the id-based Visuals.Visualize
         // lookup, since that's the version confirmed to actually render reliably.
         private static readonly Dictionary<Color, (GameObject head, GameObject leftHand, GameObject rightHand)> macroGuideObjects = new Dictionary<Color, (GameObject head, GameObject leftHand, GameObject rightHand)>();
 
