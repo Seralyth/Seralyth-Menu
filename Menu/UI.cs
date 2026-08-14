@@ -208,18 +208,18 @@ namespace Seralyth.Menu
                 if (Keyboard.current?.backquoteKey.wasPressedThisFrame == true)
                     ToggleDebug();
 
-                Color guiColor = Buttons.GetIndex("Swap GUI Colors").enabled
+                Color guiColor = Color.black;
                     ? textColors[1].GetCurrentColor()
                     : backgroundColor.GetCurrentColor();
 
                 if (versionLabel != null)
-                    versionLabel.color = guiColor;
+                    versionLabel.color = Color.white;
 
                 if (roomStatus != null)
-                    roomStatus.color = guiColor;
+                    roomStatus.color = Color.white;
 
                 if (arraylist != null)
-                    arraylist.color = guiColor;
+                    arraylist.color = Color.white;
 
                 if (watermark != null)
                 {
