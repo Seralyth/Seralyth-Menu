@@ -213,13 +213,22 @@ namespace Seralyth.Menu
                     : backgroundColor.GetCurrentColor();
 
                 if (versionLabel != null)
+                {
                     versionLabel.color = guiColor;
+                    versionLabel.gameObject.SetActive(!disableVersionGUI);
+                }
 
                 if (roomStatus != null)
+                {
                     roomStatus.color = guiColor;
+                    roomStatus.gameObject.SetActive(!disableRoomStatusGUI);
+                }
 
                 if (arraylist != null)
+                {
                     arraylist.color = guiColor;
+                    arraylist.gameObject.SetActive(showEnabledModsPC);
+                }
 
                 if (watermark != null)
                 {
@@ -236,7 +245,10 @@ namespace Seralyth.Menu
                 arraylist.SafeSetFontStyle(activeFontStyle);
 
                 if (controlBackground != null)
+                {
                     controlBackground.color = menuBackgroundColor.GetCurrentColor();
+                    controlBackground.gameObject.SetActive(!disableControlGUI);
+                }
 
                 foreach (var textObject in textObjects)
                 {
