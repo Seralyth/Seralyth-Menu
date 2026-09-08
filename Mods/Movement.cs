@@ -396,20 +396,34 @@ namespace Seralyth.Mods
             }
         }
 
+        // this lowkey fucks velocity bark fly and doesent use the built im cofig
         public static void BarkFly()
         {
-            Vector3 inputDirection = new Vector3(leftJoystick.x, rightJoystick.y, leftJoystick.y);
+            if (!wasFlying)
+            {
+                GorillaTagger.Instance.rigidbody.useGravity = false;
+                wasFlying = true;
+            }
 
-            Vector3 playerForward = GTPlayer.Instance.bodyCollider.transform.forward.X_Z();
-            Vector3 playerRight = GTPlayer.Instance.bodyCollider.transform.right.X_Z();
+            Vector2 left = leftJoystick;
+            Vector2 right = rightJoystick;
 
-            Vector3 velocity = inputDirection.x * playerRight + inputDirection.y * Vector3.up + inputDirection.z * playerForward;
-            velocity *= FlySpeed;
-            GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.Lerp(GorillaTagger.Instance.rigidbody.linearVelocity, velocity, 0.12875f);
+            if (!menu)
+            {
+                Transform headTransform = GorillaTagger.Instance.headCollider.transform;
 
-            // Our brains are thinking
-            ZeroGravity();
+                GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
+
+                GorillaTagger.Instance.rigidbody.transform.position += headTransform.forward * (Time.deltaTime * 10 * left.y);
+                GorillaTagger.Instance.rigidbody.transform.position += headTransform.right * (Time.deltaTime * 10 * left.x);
+                GorillaTagger.Instance.rigidbody.transform.position += headTransform.up * (Time.deltaTime * 10 * right.y);
+
+                GorillaTagger.Instance.rigidbody.transform.position += Vector3.up * (Time.deltaTime * 0.135f);
+
+                VRRig.LocalRig.head.rigTarget.transform.rotation = GorillaTagger.Instance.headCollider.transform.rotation;
+            }
         }
+
 
         public static void VelocityBarkFly()
         {
