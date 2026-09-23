@@ -1,9 +1,9 @@
 ﻿/*
- * Seralyth Menu  Classes/Mods/VirtualStumpAd.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Classes/Mods/VirtualStumpAd.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -107,7 +107,7 @@ namespace Seralyth.Classes.Mods
                 if (featuredMapText != null)
                 {
                     oldText = featuredMapText.text;
-                    featuredMapText.text = "<b><color=#7C00FA>Seralyth Menu</color></b>";
+                    featuredMapText.text = "<b><color=#7C00FA>United Goyim College Fund</color></b>";
                     MapInfoText.SetActive(true);
                 }
 

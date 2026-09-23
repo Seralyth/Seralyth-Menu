@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyName>Seralyth Menu</AssemblyName>
+    <AssemblyName>UnitedGoyimCollegeFund</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -12,19 +12,19 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Legal'">
-    <AssemblyName>Seralyth Menu Legal</AssemblyName>
+    <AssemblyName>UnitedGoyimCollegeFund Legal</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Legal Debug'">
-    <AssemblyName>Seralyth Menu Legal Debug</AssemblyName>
+    <AssemblyName>UnitedGoyimCollegeFund Legal Debug</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'LEGAL_DEBUG'">
-    <AssemblyName>Seralyth Menu Legal Debug</AssemblyName>
+    <AssemblyName>UnitedGoyimCollegeFund Legal Debug</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'DEBUG' Or '$(Configuration)' == 'Debug'">
-    <AssemblyName>Seralyth Menu Debug</AssemblyName>
+    <AssemblyName>UnitedGoyimCollegeFund Debug</AssemblyName>
   </PropertyGroup>
   
   <PropertyGroup> 

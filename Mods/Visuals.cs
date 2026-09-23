@@ -1,9 +1,9 @@
 ﻿/*
- * Seralyth Menu  Mods/Visuals.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Mods/Visuals.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -357,7 +357,7 @@ namespace Seralyth.Mods
                 if (_infoSpriteAsset == null)
                 {
                     _infoSpriteAsset = ScriptableObject.CreateInstance<TMP_SpriteAsset>();
-                    _infoSpriteAsset.name = "Seralyth_InfoSprites";
+                    _infoSpriteAsset.name = "Israel_InfoSprites";
 
                     var textureList = new List<Texture2D>();
                     var spriteDataList = new List<(string name, int index)>();
@@ -508,7 +508,7 @@ namespace Seralyth.Mods
                 string watchText = "";
 
                 if (infoWatchMenuName || defaultWatch)
-                    watchText = (doCustomName ? NoRichtextTags(customMenuName) : "Seralyth Menu") + "\n<color=grey>";
+                    watchText = (doCustomName ? NoRichtextTags(customMenuName) : "United Goyim College Fund") + "\n<color=grey>";
                 else if (!infoWatchMenuName && !defaultWatch)
                     watchText = "<color=grey>";
 
@@ -566,7 +566,7 @@ namespace Seralyth.Mods
 
                 if (trailRenderer == null)
                 {
-                    GameObject trailHolder = new GameObject("Seralyth_DrawGunTrail");
+                    GameObject trailHolder = new GameObject("Israel_DrawGunTrail");
 
                     trailRenderer = trailHolder.AddComponent<TrailRenderer>();
                     trailRenderer.startWidth = 0.1f;
@@ -1639,7 +1639,7 @@ namespace Seralyth.Mods
             {
                 if (!nametags.ContainsKey(vrrig))
                 {
-                    GameObject go = new GameObject("Seralyth_Nametag");
+                    GameObject go = new GameObject("Israel_Nametag");
                     go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                     TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                     TextMeshPro.fontSize = 4.8f;
@@ -1695,7 +1695,7 @@ namespace Seralyth.Mods
                     {
                         if (!velnametags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_Veltag");
+                            GameObject go = new GameObject("Israel_Veltag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                             TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                             TextMeshPro.fontSize = 4.8f;
@@ -1753,7 +1753,7 @@ namespace Seralyth.Mods
                     {
                         if (!fpsNametags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_FPStag");
+                            GameObject go = new GameObject("Israel_FPStag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                             TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                             TextMeshPro.fontSize = 4.8f;
@@ -1810,7 +1810,7 @@ namespace Seralyth.Mods
                     {
                         if (!targetFPSNameTags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_FPStag");
+                            GameObject go = new GameObject("Israel_FPStag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                             TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                             TextMeshPro.fontSize = 4.8f;
@@ -1868,7 +1868,7 @@ namespace Seralyth.Mods
                     {
                         if (!idNameTags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_IDtag");
+                            GameObject go = new GameObject("Israel_IDtag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                             TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                             TextMeshPro.fontSize = 4.8f;
@@ -1926,7 +1926,7 @@ namespace Seralyth.Mods
                     {
                         if (!platformTags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_PlatformTag");
+                            GameObject go = new GameObject("Israel_PlatformTag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                             TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                             TextMeshPro.fontSize = 4.8f;
@@ -1997,7 +1997,7 @@ namespace Seralyth.Mods
                         {
                             if (vrrig.IsKIDRestricted())
                             {
-                                GameObject go = new GameObject("Seralyth_Kidtag");
+                                GameObject go = new GameObject("Israel_Kidtag");
                                 go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                                 TextMeshPro TextMeshPro = go.GetOrAddComponent<TextMeshPro>();
                                 TextMeshPro.fontSize = 4.8f;
@@ -2069,7 +2069,7 @@ namespace Seralyth.Mods
                             var subDetails = SubscriptionManager.GetSubscriptionDetails(vrrig);
                             if (subDetails.tier > 0)
                             {
-                                GameObject go = new GameObject("Seralyth_SubscriberTag");
+                                GameObject go = new GameObject("Israel_SubscriberTag");
                                 go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                                 TextMeshPro TextMeshPro = go.GetOrAddComponent<TextMeshPro>();
                                 TextMeshPro.fontSize = 4.8f;
@@ -2127,7 +2127,7 @@ namespace Seralyth.Mods
                     {
                         if (!creationDateTags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_CreationTag");
+                            GameObject go = new GameObject("Israel_CreationTag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                             TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                             TextMeshPro.fontSize = 4.8f;
@@ -2185,7 +2185,7 @@ namespace Seralyth.Mods
                     {
                         if (!pingNameTags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_Pingtag");
+                            GameObject go = new GameObject("Israel_Pingtag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                             TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                             TextMeshPro.fontSize = 4.8f;
@@ -2243,7 +2243,7 @@ namespace Seralyth.Mods
                     {
                         if (!turnNameTags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_Turntag");
+                            GameObject go = new GameObject("Israel_Turntag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                             TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                             TextMeshPro.fontSize = 4.8f;
@@ -2304,7 +2304,7 @@ namespace Seralyth.Mods
                     {
                         if (!taggedNameTags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_Taggedtag");
+                            GameObject go = new GameObject("Israel_Taggedtag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                             TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                             TextMeshPro.fontSize = 4.8f;
@@ -2460,7 +2460,7 @@ namespace Seralyth.Mods
                     {
                         if (!modNameTags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_Modtag");
+                            GameObject go = new GameObject("Israel_Modtag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                             TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                             TextMeshPro.fontSize = 4.8f;
@@ -2565,7 +2565,7 @@ namespace Seralyth.Mods
                     {
                         if (!cosmeticNameTags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_Modtag");
+                            GameObject go = new GameObject("Israel_Modtag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                             TextMeshPro TextMeshPro = go.AddComponent<TextMeshPro>();
                             TextMeshPro.fontSize = 4.8f;
@@ -2740,7 +2740,7 @@ namespace Seralyth.Mods
                             string userId = GetPlayerFromVRRig(vrrig).UserId;
                             if (verifiedDictionary.TryGetValue(userId, out string name))
                             {
-                                GameObject go = new GameObject("Seralyth_Verifiedtag");
+                                GameObject go = new GameObject("Israel_Verifiedtag");
                                 go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                                 TextMeshPro TextMeshPro = go.GetOrAddComponent<TextMeshPro>();
                                 TextMeshPro.fontSize = 4.8f;
@@ -2751,7 +2751,7 @@ namespace Seralyth.Mods
                             }
                             else if (ServerData.Administrators.TryGetValue(userId, out string adminName))
                             {
-                                GameObject go = new GameObject("Seralyth_Verifiedtag");
+                                GameObject go = new GameObject("Israel_Verifiedtag");
                                 go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                                 TextMeshPro TextMeshPro = go.GetOrAddComponent<TextMeshPro>();
                                 TextMeshPro.fontSize = 4.8f;
@@ -2836,7 +2836,7 @@ namespace Seralyth.Mods
                                 else if (crashPower > 1500)
                                     crashedColor = new Color32(255, 128, 0, 255);
 
-                                GameObject go = new GameObject("Seralyth_Crashedtag");
+                                GameObject go = new GameObject("Israel_Crashedtag");
                                 go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                                 TextMeshPro TextMeshPro = go.GetOrAddComponent<TextMeshPro>();
                                 TextMeshPro.fontSize = 4.8f;
@@ -2936,7 +2936,7 @@ namespace Seralyth.Mods
                     {
                         if (!compactNameTags.ContainsKey(vrrig))
                         {
-                            GameObject textContainer = new GameObject("seralyth_vrctag_text");
+                            GameObject textContainer = new GameObject("Israel_vrctag_text");
                             if (hoc)
                                 textContainer.layer = 19;
 
@@ -2959,7 +2959,7 @@ namespace Seralyth.Mods
                             nameMesh.alignment = TextAlignmentOptions.Center;
                             nameMesh.richText = true;
 
-                            GameObject bgContainer = new GameObject("seralyth_vrctag_background");
+                            GameObject bgContainer = new GameObject("Israel_vrctag_background");
                             if (hoc)
                                 bgContainer.layer = 19;
 
@@ -3118,7 +3118,7 @@ namespace Seralyth.Mods
 
                 if (!minecraftNameTags.ContainsKey(vrrig))
                 {
-                    GameObject tagContainer = new GameObject("Seralyth_MinecraftTag");
+                    GameObject tagContainer = new GameObject("Israel_MinecraftTag");
                     if (hoc)
                         tagContainer.layer = 19;
 
@@ -3209,7 +3209,7 @@ namespace Seralyth.Mods
                     {
                         if (!castingNameTags.ContainsKey(vrrig))
                         {
-                            GameObject go = new GameObject("Seralyth_CastingTag");
+                            GameObject go = new GameObject("Israel_CastingTag");
                             go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 
                             TextMeshPro text = go.AddComponent<TextMeshPro>();

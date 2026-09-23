@@ -1,9 +1,9 @@
 /*
- * Seralyth Menu  Managers/PatreonManager.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Managers/PatreonManager.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -129,7 +129,7 @@ namespace Seralyth.Managers
                     playerIndicator.GetComponent<Renderer>().material.mainTexture = LoadTextureFromURL(member.Value.IconURL, $"Images/Patreon/{member.Key.UserId}.{FileUtilities.GetFileExtension(member.Value.IconURL)}"); // errors?
                     playerIndicator.GetComponent<Renderer>().material.color = Color.white;
 
-                    GameObject go = new GameObject("Seralyth_Nametag");
+                    GameObject go = new GameObject("Israel_Nametag");
                     go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                     TextMeshPro textMesh = go.AddComponent<TextMeshPro>();
                     textMesh.fontSize = 4.8f;
@@ -150,7 +150,7 @@ namespace Seralyth.Managers
                 playerIndicator.transform.position = Visuals.GetNameTagTransform(playerRig).position + Visuals.GetNameTagTransform(playerRig).up * (distance * playerRig.scaleFactor);
                 playerIndicator.transform.LookAt(GorillaTagger.Instance.headCollider.transform.position);
 
-                GameObject nameTag = playerIndicator.transform.Find("Seralyth_Nametag").gameObject;
+                GameObject nameTag = playerIndicator.transform.Find("Israel_Nametag").gameObject;
                 nameTag.transform.position = Visuals.GetNameTagTransform(playerRig).position + Visuals.GetNameTagTransform(playerRig).up * ((distance + 0.25f) * playerRig.scaleFactor);
                 nameTag.transform.LookAt(Camera.main.transform.position);
                 nameTag.transform.Rotate(0f, 180f, 0f);

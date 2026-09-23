@@ -1,9 +1,9 @@
 /*
- * Seralyth Menu  Mods/Safety.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Mods/Safety.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -453,7 +453,7 @@ namespace Seralyth.Mods
                         catch { LogManager.Log("Failed to log player"); }
 
                         text += "\n====================================\n";
-                        text += "Text file generated with Seralyth Menu";
+                        text += "Text file generated with United Goyim College Fund";
                         string fileName = $"{PluginInfo.BaseDirectory}/" + player.NickName + " - Anti Moderator.txt";
 
                         File.WriteAllText(fileName, text);
@@ -497,7 +497,7 @@ namespace Seralyth.Mods
                         catch { LogManager.Log("Failed to log player"); }
 
                         text += "\n====================================\n";
-                        text += "Text file generated with Seralyth Menu";
+                        text += "Text file generated with United Goyim College Fund";
                         string fileName = $"{PluginInfo.BaseDirectory}/" + player.NickName + " - Anti Content Creator.txt";
 
                         File.WriteAllText(fileName, text);

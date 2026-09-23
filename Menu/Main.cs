@@ -1,9 +1,9 @@
 /*
- * Seralyth Menu  Menu/Main.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Menu/Main.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -90,12 +90,9 @@ namespace Seralyth.Menu
             InitializeFonts();
             activeFont = AgencyFB;
 
-            //if (Plugin.FirstLaunch)
-            //    Prompt("It seems like this is your first time using the menu. Would you like to watch a quick tutorial to get to know how to use it?", Settings.ShowTutorial);
-            //else
-            //    acceptedDonations = File.Exists($"{PluginInfo.BaseDirectory}/Seralyth_HideDonationButton.txt");
+            Settings.ShowTutorial();
             if (!Bootstrapper.FirstLaunch)
-                acceptedDonations = File.Exists($"{PluginInfo.BaseDirectory}/Seralyth_HideDonationButton.txt");
+                acceptedDonations = File.Exists($"{PluginInfo.BaseDirectory}/Israel_HideDonationButton.txt");
 
             NetworkSystem.Instance.OnJoinedRoomEvent += OnJoinRoom;
             NetworkSystem.Instance.OnReturnedToSinglePlayer += OnLeaveRoom;
@@ -526,7 +523,7 @@ namespace Seralyth.Menu
 
                 if (animatedTitle && title != null)
                 {
-                    string targetString = doCustomName ? NoRichtextTags(customMenuName) : "Seralyth Menu";
+                    string targetString = doCustomName ? NoRichtextTags(customMenuName) : "United Goyim College Fund";
                     int length = (int)Mathf.PingPong(Time.time / 0.25f, targetString.Length + 1);
                     title.text = length > 0 ? targetString[..length] : "";
                 }
@@ -1859,7 +1856,7 @@ namespace Seralyth.Menu
             {
                 if (buttonSpriteSheet != null) return buttonSpriteSheet;
                 buttonSpriteSheet = ScriptableObject.CreateInstance<TMP_SpriteAsset>();
-                buttonSpriteSheet.name = "Seralyth_SpriteSheet";
+                buttonSpriteSheet.name = "Israel_SpriteSheet";
 
                 var textureList = new List<Texture2D>();
                 var spriteDataList = new List<(string name, int index)>();
@@ -2374,7 +2371,7 @@ namespace Seralyth.Menu
                     case 61:
                         if (videoPlayer == null)
                         {
-                            videoPlayer = new GameObject("Seralyth_VideoPlayer").AddComponent<VideoPlayer>();
+                            videoPlayer = new GameObject("Israel_VideoPlayer").AddComponent<VideoPlayer>();
                             videoPlayer.playOnAwake = true;
                             videoPlayer.isLooping = true;
                             videoPlayer.url = $"{PluginInfo.ServerResourcePath}/Videos/Themes/badapple.mp4";
@@ -2434,7 +2431,7 @@ namespace Seralyth.Menu
                     }
                 }.AddComponent<TextMeshPro>();
                 title.font = activeFont;
-                title.text = translate ? "Seralyth" : "<b>Seralyth</b>";
+                title.text = translate ? "United Goyim College Fund" : "<b>United Goyim College Fund</b>";
 
                 if (doCustomName)
                     title.text = customMenuName;
@@ -2477,7 +2474,7 @@ namespace Seralyth.Menu
 
                 if (animatedTitle)
                 {
-                    string targetString = doCustomName ? NoRichtextTags(customMenuName) : "Seralyth Menu";
+                    string targetString = doCustomName ? NoRichtextTags(customMenuName) : "United Goyim College Fund";
                     int length = (int)Mathf.PingPong(Time.time / 0.25f, targetString.Length);
                     title.text = length > 0 ? targetString[..length] : "";
                 }
@@ -3462,7 +3459,7 @@ namespace Seralyth.Menu
                     case "webm":
                     case "mov":
                         {
-                            promptVideoPlayer = new GameObject("Seralyth_PromptVideoPlayer").AddComponent<VideoPlayer>();
+                            promptVideoPlayer = new GameObject("Israel_PromptVideoPlayer").AddComponent<VideoPlayer>();
                             promptVideoPlayer.playOnAwake = true;
                             promptVideoPlayer.isLooping = true;
                             promptVideoPlayer.url = promptImageUrl;
@@ -4285,7 +4282,7 @@ namespace Seralyth.Menu
             if (disableGunLine) return (Ray, GunPointer);
             if (GunLine == null)
             {
-                GameObject line = new GameObject("Seralyth_GunLine");
+                GameObject line = new GameObject("Israel_GunLine");
                 GunLine = line.AddComponent<LineRenderer>();
             }
 

@@ -1,6 +1,6 @@
 # 🛡️ Security Policy
 Find a vulnerable exploit with the menu? Please get in touch with me in the following ways:
-- Private GitHub security forms: https://github.com/Seralyth/Seralyth-Menu/security/advisories/new
+- Private GitHub security forms: https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund/security/advisories/new
 - Email: inquiries@seralyth.software
 
 > [!CAUTION]

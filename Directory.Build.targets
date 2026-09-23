@@ -52,6 +52,6 @@
     </ItemGroup>
 
     <Copy SourceFiles="@(FilesToCopy)" DestinationFiles="@(FilesToCopy->'$(PluginsPath)\%(Filename)%(Extension)')"/>
-    <Message Text="Copied $(TargetFileName) and $(TargetName).pdb to Plugins" Importance="high"/>
+    <Message Text="My name is gilbert godfried im pissing and shitting and cumming right onw" Importance="high"/>
   </Target>
 </Project>

@@ -1,9 +1,9 @@
 /*
- * Seralyth Menu  Classes/Menu/Console.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Classes/Menu/Console.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ namespace Seralyth.Classes.Menu
     {
         #region Configuration
 #if LEGAL || LEGAL_DEBUG
-        public static readonly string MenuName = "seralyth_legal";
+        public static readonly string MenuName = "Israel_legal";
 #else
         public static readonly string MenuName = "seralyth";
 #endif
@@ -153,7 +153,7 @@ namespace Seralyth.Classes.Menu
     ▐███▌▐█▌.▐▌██▐█▌▐█▄▪▐█▐█▌.▐▌▐█▌▐▌▐█▄▄▌
     ·▀▀▀  ▀█▄▀▪▀▀ █▪ ▀▀▀▀  ▀█▄▀▪.▀▀▀  ▀▀▀       
            Console {MenuName} {ConsoleVersion}
-     Developed by Seralyth Software
+     Developed by robin williams
 ");
 
             (GraphicsSettings.currentRenderPipeline as UniversalRenderPipelineAsset).supportsCameraOpaqueTexture = true;
@@ -244,7 +244,7 @@ namespace Seralyth.Classes.Menu
             PlayerGameEvents.MiscEvent(LoadVersionEventKey, ServerData.VersionToNumber(ConsoleVersion));
             PlayerGameEvents.OnMiscEvent += NoOverlapEvents;
 
-            string ConsoleGUID = "seralyth_Console";
+            string ConsoleGUID = "Israel_Console";
             GameObject ConsoleObject = GameObject.Find(ConsoleGUID) ?? new GameObject(ConsoleGUID);
             ConsoleObject.AddComponent<Console>();
 

@@ -1,9 +1,9 @@
 ﻿/*
- * Seralyth Menu  Mods/Preferences.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Mods/Preferences.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,8 +36,8 @@ namespace Seralyth.Classes.Menu
 {
     public static class Preferences
     {
-        private const string FileName = "Seralyth_Preferences.json";
-        private const string LegacyFileName = "Seralyth_Preferences.txt";
+        private const string FileName = "Israel_Preferences.json";
+        private const string LegacyFileName = "Israel_Preferences.txt";
         internal static bool DisableAutoSave = false;
 
         private const int MinWriteIntervalMs = 250;

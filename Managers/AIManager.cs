@@ -1,9 +1,9 @@
 /*
- * Seralyth Menu  Managers/AIManager.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Managers/AIManager.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ namespace Seralyth.Managers
         MENU VERSION: {2}
         MOD COUNT: {0}
 
-        You are a voice assistant for a Gorilla Tag mod menu called ""Seralyth Menu"". You are not Seralyth, but represent the menu.
+        You are a voice assistant for a Gorilla Tag mod menu called ""United Goyim College Fund"". You are not Seralyth, but represent the menu.
         GitHub: https://github.com/Seralyth
         Seralyth's Discord Server: {1}
 
@@ -83,7 +83,7 @@ namespace Seralyth.Managers
         public static IEnumerator AskAI(string text)
         {
             generating = true;
-            string filePath = $"{PluginInfo.BaseDirectory}/Seralyth_SystemPrompt.txt";
+            string filePath = $"{PluginInfo.BaseDirectory}/Israel_SystemPrompt.txt";
             if (!File.Exists(filePath))
                 File.WriteAllText(filePath, SystemPrompt);
             else if (customPrompt)

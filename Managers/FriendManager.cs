@@ -1,9 +1,9 @@
 /*
- * Seralyth Menu  Managers/FriendManager.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Managers/FriendManager.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -240,7 +240,7 @@ namespace Seralyth.Managers
                         if (rightJoystickClick && !joystickMenu)
                         {
                             if (pingObject == null)
-                                pingObject = new GameObject("Seralyth_PingLine");
+                                pingObject = new GameObject("Israel_PingLine");
 
                             Color targetColor = VRRig.LocalRig.playerColor;
                             targetColor.a = 0.15f;
@@ -450,7 +450,7 @@ namespace Seralyth.Managers
                                 head.transform.localScale = Vector3.one * 0.3f;
                                 head.GetComponent<Renderer>().material.color = senderRig.playerColor;
 
-                                GameObject nametag = new GameObject("Seralyth_Nametag");
+                                GameObject nametag = new GameObject("Israel_Nametag");
                                 nametag.transform.SetParent(head.transform);
                                 nametag.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                                 nametag.transform.localPosition = new Vector3(0f, 0.8f, 0f);

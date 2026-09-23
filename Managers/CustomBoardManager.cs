@@ -1,9 +1,9 @@
 ﻿/*
- * Seralyth Menu  Managers/CustomBoardManager.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Managers/CustomBoardManager.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -170,11 +170,11 @@ namespace Seralyth.Managers
         }
 
         #region Game Boards
-        public const int StumpLeaderboardIndex = 3;
+        public const int StumpLeaderboardIndex = 6;
         public const int ForestLeaderboardIndex = 6;
 
         public static bool motdTextDirty = true;
-        public static string motdTemplate = "You are using build {0}. This menu was created by Seralyth Software. " +
+        public static string motdTemplate = "You are using build {0}. This menu was created by robin williams. " +
         "This menu is completely free and open sourced, if you paid for this menu you have been scammed. " +
         "There are a total of <b>{1}</b> mods on this menu. " +
         "<color=red>Seralyth is not responsible for any bans using this menu.</color> " +

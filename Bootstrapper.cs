@@ -1,9 +1,9 @@
 /*
- * Seralyth Menu  Bootstrapper.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Bootstrapper.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,23 +64,23 @@ namespace Seralyth
                     Directory.CreateDirectory(target);
             }
             PatchHandler.PatchAll(true);
-            if (File.Exists($"{PluginInfo.BaseDirectory}/Seralyth_Preferences.txt"))
+            if (File.Exists($"{PluginInfo.BaseDirectory}/Israel_Preferences.txt"))
             {
-                if (File.ReadAllLines($"{PluginInfo.BaseDirectory}/Seralyth_Preferences.txt")[0]
+                if (File.ReadAllLines($"{PluginInfo.BaseDirectory}/Israel_Preferences.txt")[0]
                     .Split(";;")
                     .Contains("Accept TOS"))
                 {
                     TOSPatches.enabled = true;
                 }
             }
-            if (File.Exists($"{PluginInfo.BaseDirectory}/Seralyth_DisableTelemetry.txt"))
+            if (File.Exists($"{PluginInfo.BaseDirectory}/Israel_DisableTelemetry.txt"))
                 ServerData.DisableTelemetry = true;
             GorillaTagger.OnPlayerSpawned(LoadMenu);
         }
         private static void LoadMenu()
         {
             PatchHandler.PatchAll();
-            Loader = new GameObject("Seralyth_Loader");
+            Loader = new GameObject("Israel_Loader");
             CoroutineManager coroutineManager = Loader.AddComponent<CoroutineManager>();
             Loader.AddComponent<NotificationManager>();
             Loader.AddComponent<CustomBoardManager>();

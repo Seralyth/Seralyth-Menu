@@ -1,9 +1,9 @@
 /*
- * Seralyth Menu  Mods/Fun.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Mods/Fun.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -627,7 +627,7 @@ namespace Seralyth.Mods
         {
             if (FreeCamObject == null)
             {
-                FreeCamObject = new GameObject("Seralyth_CameraObj");
+                FreeCamObject = new GameObject("Israel_CameraObj");
                 FreeCamObject.transform.position = GorillaTagger.Instance.headCollider.transform.position;
             }
 
@@ -652,7 +652,7 @@ namespace Seralyth.Mods
         {
             if (FreeCamObject == null)
             {
-                FreeCamObject = new GameObject("Seralyth_CameraObj");
+                FreeCamObject = new GameObject("Israel_CameraObj");
                 FreeCamObject.transform.position = GorillaTagger.Instance.headCollider.transform.position;
             }
 
@@ -668,7 +668,7 @@ namespace Seralyth.Mods
         {
             if (FreeCamObject == null)
             {
-                FreeCamObject = new GameObject("Seralyth_CameraObj");
+                FreeCamObject = new GameObject("Israel_CameraObj");
                 FreeCamObject.transform.position = GorillaTagger.Instance.headCollider.transform.position;
             }
 
@@ -684,7 +684,7 @@ namespace Seralyth.Mods
         {
             if (FreeCamObject == null)
             {
-                FreeCamObject = new GameObject("Seralyth_CameraObj");
+                FreeCamObject = new GameObject("Israel_CameraObj");
                 FreeCamObject.transform.position = GorillaTagger.Instance.headCollider.transform.position;
             }
 
@@ -767,7 +767,7 @@ namespace Seralyth.Mods
                 {
                     if (FreeCamObject == null)
                     {
-                        FreeCamObject = new GameObject("Seralyth_CameraObj");
+                        FreeCamObject = new GameObject("Israel_CameraObj");
                         FreeCamObject.transform.position = GorillaTagger.Instance.headCollider.transform.position;
                     }
 
@@ -1484,7 +1484,7 @@ namespace Seralyth.Mods
 
         private static VirtualStumpAd virtualStumpAd;
         public static void CustomVirtualStumpVideo() =>
-            virtualStumpAd ??= new GameObject("Seralyth_VirtualStumpAd").AddComponent<VirtualStumpAd>();
+            virtualStumpAd ??= new GameObject("Israel_VirtualStumpAd").AddComponent<VirtualStumpAd>();
 
         public static void DisableCustomVirtualStumpVideo()
         {
@@ -3266,7 +3266,7 @@ Piece Name: {gunTarget.name}";
 
                     ThrowableBug targetBug = bugSpamToggle ? bug : firefly;
 
-                    GameObject bugSpamObject = new GameObject("Seralyth_BugSpamObject");
+                    GameObject bugSpamObject = new GameObject("Israel_BugSpamObject");
                     bugSpamObject.transform.localScale = Vector3.one * 0.2f;
                     bugSpamObject.layer = 3;
 
@@ -3310,7 +3310,7 @@ Piece Name: {gunTarget.name}";
 
                 LckSocialCamera camera = cameraSpamType ? LckSocialCameraManager.Instance._networkedCococam : LckSocialCameraManager.Instance._networkedTablet;
 
-                GameObject cameraSpamObject = new GameObject("Seralyth_CameraSpamObject");
+                GameObject cameraSpamObject = new GameObject("Israel_CameraSpamObject");
                 cameraSpamObject.transform.localScale = Vector3.one * 0.2f;
                 cameraSpamObject.layer = 3;
 
@@ -3378,7 +3378,7 @@ Piece Name: {gunTarget.name}";
                     case 0:
                         {
                             ThrowableBug targetBug = bug;
-                            GameObject bugSpamObject = new GameObject("Seralyth_BugSpamObject");
+                            GameObject bugSpamObject = new GameObject("Israel_BugSpamObject");
                             bugSpamObject.transform.localScale = Vector3.one * 0.2f;
                             bugSpamObject.layer = 3;
 
@@ -3412,7 +3412,7 @@ Piece Name: {gunTarget.name}";
                     case 1:
                         {
                             ThrowableBug targetBug = firefly;
-                            GameObject bugSpamObject = new GameObject("Seralyth_FireflySpamObject");
+                            GameObject bugSpamObject = new GameObject("Israel_FireflySpamObject");
                             bugSpamObject.transform.localScale = Vector3.one * 0.2f;
                             bugSpamObject.layer = 3;
 
@@ -3450,7 +3450,7 @@ Piece Name: {gunTarget.name}";
 
                             LckSocialCamera camera = LckSocialCameraManager.Instance._networkedCococam;
 
-                            GameObject cameraSpamObject = new GameObject("Seralyth_CameraSpamObject");
+                            GameObject cameraSpamObject = new GameObject("Israel_CameraSpamObject");
                             cameraSpamObject.transform.localScale = Vector3.one * 0.2f;
                             cameraSpamObject.layer = 3;
 
@@ -3494,7 +3494,7 @@ Piece Name: {gunTarget.name}";
 
                             LckSocialCamera camera = LckSocialCameraManager.Instance._networkedTablet;
 
-                            GameObject cameraSpamObject = new GameObject("Seralyth_CameraSpamObject");
+                            GameObject cameraSpamObject = new GameObject("Israel_CameraSpamObject");
                             cameraSpamObject.transform.localScale = Vector3.one * 0.2f;
                             cameraSpamObject.layer = 3;
 
@@ -3783,7 +3783,7 @@ Piece Name: {gunTarget.name}";
 
                 if (inAir && !lastInAir)
                 {
-                    GameObject bugSpamObject = new GameObject("Seralyth_BugSpamObject");
+                    GameObject bugSpamObject = new GameObject("Israel_BugSpamObject");
                     bugSpamObject.transform.localScale = Vector3.one * 0.2f;
                     bugSpamObject.layer = 3;
 
@@ -3864,7 +3864,7 @@ Piece Name: {gunTarget.name}";
                 {
                     grabbingCamera = false;
 
-                    GameObject bugSpamObject = new GameObject("Seralyth_BugSpamObject");
+                    GameObject bugSpamObject = new GameObject("Israel_BugSpamObject");
                     bugSpamObject.transform.localScale = Vector3.one * 0.2f;
                     bugSpamObject.layer = 3;
 
@@ -5954,7 +5954,7 @@ Piece Name: {gunTarget.name}";
         public static string[] names = { };
         public static void EnableCustomNameCycle() // Thanks to xynz_ for some fixes
         {
-            var path = $"{PluginInfo.BaseDirectory}/Seralyth_CustomNameCycle.txt";
+            var path = $"{PluginInfo.BaseDirectory}/Israel_CustomNameCycle.txt";
             if (File.Exists(path))
             {
                 names = File.ReadAllText(path)
@@ -6991,7 +6991,7 @@ Piece Name: {gunTarget.name}";
                 catch { LogManager.Log("Failed to log player"); }
             }
             text += "\n====================================\n";
-            text += "Text file generated with Seralyth Menu";
+            text += "Text file generated with United Goyim College Fund";
             string fileName = $"{PluginInfo.BaseDirectory}/PlayerInfo/" + PhotonNetwork.CurrentRoom.Name + ".txt";
 
             File.WriteAllText(fileName, text);

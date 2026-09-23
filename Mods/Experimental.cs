@@ -1,9 +1,9 @@
 /*
- * Seralyth Menu  Mods/Experimental.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Mods/Experimental.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -123,7 +123,7 @@ namespace Seralyth.Mods
                 i++;
             }
             text += "\n====================================\n";
-            text += "Text file generated with Seralyth Menu";
+            text += "Text file generated with United Goyim College Fund";
             string fileName = $"{PluginInfo.BaseDirectory}/SoundData.txt";
 
             File.WriteAllText(fileName, text);
@@ -145,7 +145,7 @@ namespace Seralyth.Mods
                 catch { LogManager.Log("Failed to log hat"); }
             }
             text += "\n====================================\n";
-            text += "Text file generated with Seralyth Menu";
+            text += "Text file generated with United Goyim College Fund";
             string fileName = $"{PluginInfo.BaseDirectory}/CosmeticData.txt";
 
             File.WriteAllText(fileName, text);
@@ -188,7 +188,7 @@ namespace Seralyth.Mods
                 i++;
             }
             text += "\n====================================\n";
-            text += "Text file generated with Seralyth Menu";
+            text += "Text file generated with United Goyim College Fund";
             string fileName = $"{PluginInfo.BaseDirectory}/RPCData.txt";
 
             File.WriteAllText(fileName, text);
@@ -1253,7 +1253,7 @@ namespace Seralyth.Mods
                                 VRRig vrrig = GetVRRigFromPlayer(sender);
                                 if (!nametags.TryGetValue(vrrig, out var nametag))
                                 {
-                                    GameObject go = new GameObject("Seralyth_MenuUserNametag");
+                                    GameObject go = new GameObject("Israel_MenuUserNametag");
                                     go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                                     TextMeshPro textMesh = go.AddComponent<TextMeshPro>();
                                     textMesh.fontSize = 4.8f;
@@ -1373,7 +1373,7 @@ namespace Seralyth.Mods
                                 VRRig vrrig = GetVRRigFromPlayer(sender);
                                 if (!nametags.TryGetValue(vrrig, out var nametag))
                                 {
-                                    GameObject go = new GameObject("Seralyth_Nametag");
+                                    GameObject go = new GameObject("Israel_Nametag");
                                     go.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
                                     TextMeshPro textMesh = go.AddComponent<TextMeshPro>();
                                     textMesh.fontSize = 48;

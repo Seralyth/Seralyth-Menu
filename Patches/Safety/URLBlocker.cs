@@ -1,9 +1,9 @@
 ﻿/*
- * Seralyth Menu  Managers/URLBlocker.cs
- * A community driven mod menu for Gorilla Tag with over 1000+ mods
+ * United Goyim College Fund  Managers/URLBlocker.cs
+ * A stupid shit hole i fuckjing hate this game with over 1000+ mods
  *
- * Copyright (C) 2026  Seralyth Software
- * https://github.com/Seralyth/Seralyth-Menu
+ * Copyright (C) 2026  robin williams
+ * https://github.com/iiDk-the-inactual/UnitedGoyimCollegeFund
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -120,7 +120,7 @@ namespace Seralyth.Patches.Safety
                 shouldLog = notifiedAssemblies.Add(assemblyName);
 
             if (shouldLog)
-                LogManager.Log($"HEY!! Seralyth Menu blocked a potentionally DANGEROUS REQUEST to: {url} | Reason: {reason} | Assumed Assembly: {assemblyName} | Assumed File: {fileName}");
+                LogManager.Log($"HEY!! United Goyim College Fund blocked a potentionally DANGEROUS REQUEST to: {url} | Reason: {reason} | Assumed Assembly: {assemblyName} | Assumed File: {fileName}");
         }
 
         private static string NormalizeHost(string host)
@@ -329,7 +329,7 @@ namespace Seralyth.Patches.Safety
 
                     var response = new HttpResponseMessage(HttpStatusCode.Forbidden)
                     {
-                        Content = new StringContent("This request has been blocked by Seralyth Menu, as it has been marked as a unsafe site.")
+                        Content = new StringContent("This request has been blocked by United Goyim College Fund, as it has been marked as a unsafe site.")
                     };
 
                     __result = Task.FromResult(response);
